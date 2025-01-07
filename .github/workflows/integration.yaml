@@ -4,10 +4,16 @@ on:
 name: Integration
 
 jobs:
-  test-on-google-test-lab:
-  runs-on: ubuntu-latest
+  integration_test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+      checks: write
+      pull-requests: write
 
-  steps:
+    steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
