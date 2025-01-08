@@ -40,6 +40,12 @@ jobs:
           channel: "stable"
           cache: true
           cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}"
+       
+       - name: Set up Java
+         uses: actions/setup-java@v4
+         with:
+          java-version: 17
+          distribution: "temurin"
 
       - uses: webfactory/ssh-agent@v0.9.0
         with:
