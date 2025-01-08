@@ -2,8 +2,6 @@
 dart pub global activate patrol_cli
 flutter build apk --config-only
 
-flutter build apk --config-only
-
 
 patrol build android \
   --target integration_test/tests/login/login_test.dart \
