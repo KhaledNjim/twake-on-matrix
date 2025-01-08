@@ -1,4 +1,5 @@
 #!/bin/bash
+
 dart pub global activate patrol_cli
 flutter build apk --config-only
 
