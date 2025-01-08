@@ -49,5 +49,31 @@ jobs:
         run:
           flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: Test
-        run: ./scripts/run_patrol_tests.sh
+      - name: Run Patrol Tests
+        shell: bash
+
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          SERVER_URL: ${{ secrets.SERVER_URL }}
+        run: |
+
+          dart pub global activate patrol_cli
+
+          flutter build apk --config-only
+
+          patrol build android \
+          --target integration_test/tests/login/login_test.dart \
+          -v \
+          --dart-define=USERNAME="$USERNAME" \
+          --dart-define=SERVER_URL="$SERVER_URL" \
+          --dart-define=PASSWORD="$PASSWORD"
+
+          gcloud firebase test android run \
+          --type instrumentation \
+          --app build/app/outputs/apk/debug/app-debug.apk \
+          --test build/app/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+          --device model=MediumPhone.arm,version=34 \
+          --timeout 5m \
+          --use-orchestrator \
+          --environment-variables clearPackageData=true
