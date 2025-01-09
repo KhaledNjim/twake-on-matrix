@@ -33,7 +33,7 @@ jobs:
       - name: Setup Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
      
-        name: Run your commands
+      - name: Run your commands
         run: |
           # Your gcloud commands here
           gcloud compute instances list
