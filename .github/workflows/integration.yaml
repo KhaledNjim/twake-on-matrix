@@ -32,7 +32,11 @@ jobs:
 
       - name: Setup Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
-        
+     
+      - name: account name
+        run: |
+            gcloud auth list
+
       - name: Setup flutter
         uses: subosito/flutter-action@v2
         with:
